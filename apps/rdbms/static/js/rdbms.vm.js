@@ -243,6 +243,42 @@ function RdbmsViewModel() {
     $.ajax(request);
   };
 
+self.exportQueryResultsToCSV = function(){
+
+	var csvContent = "";
+	index=0;
+	rows=viewModel.rows();
+
+	csvContent+="\n";
+	for(var row in rows){
+		labels = (Object.keys(rows[row]));
+
+		if(index==0){
+			amt=0;
+			for (titles in Object.keys(rows[row])){
+				amt++;
+			}
+
+			for (titles in Object.keys(rows[row])){
+				if(titles<amt) csvContent+=labels[titles]+",";
+			}
+
+			csvContent+="\n";
+		}
+
+		for(var k in rows[row]){
+			csvContent+=rows[row][k]+",";
+		}
+		csvContent+="\n";
+		index++
+	}
+
+	var encodedUri = "data:text/csv;charset=utf-8,"+encodeURIComponent(csvContent);
+	window.open(encodedUri);
+	window.focus();
+
+};
+
   self.fetchServers = function() {
     var request = {
       url: '/rdbms/api/servers/',
