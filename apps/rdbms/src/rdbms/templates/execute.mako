@@ -114,7 +114,10 @@ ${ commonheader(_('Query'), app_name, user) | n,unicode }
     </div>
     <div data-bind="css: {'hide': rows().length == 0}" class="hide">
       <div class="card card-small scrollable">
-        <table id="resultTable" class="table table-striped table-condensed resultTable" cellpadding="0" cellspacing="0" data-tablescroller-min-height-disable="true" data-tablescroller-enforce-height="true">
+      <a id="download-csv" data-bind="click: exportQueryResultsToCSV" href="javascript:void(0)" title="${_('Download the results in CSV format')}" rel="tooltip"
+        class="view-query-results download pull-right" style="clear:both; text-align:right;"><h4 style="margin-right: 20px"><i style="font-family: FontAwesome; font-style:normal;" class="hfo hfo-file-csv">&#xf1c9; &nbsp; </i> </h4>
+      </a><div style="clear:both"></div>
+	 <table id="resultTable" class="table table-striped table-condensed resultTable" cellpadding="0" cellspacing="0" data-tablescroller-min-height-disable="true" data-tablescroller-enforce-height="true">
           <thead>
             <tr data-bind="foreach: columns">
               <th data-bind="text: $data"></th>
